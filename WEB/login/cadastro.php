@@ -1,5 +1,9 @@
 <?php 
     require_once "../conexao/conexao.php";
+    function str_contains(string $haystack, string $needle): bool
+    {
+        return '' === $needle || false !== strpos($haystack, $needle);
+    }
     if(isset($_POST['nome'])&&isset($_POST['email'])&&isset($_POST['tell'])&&isset($_POST['ddd'])&&isset($_POST['nasci'])&&isset($_POST['pass'])&&isset($_POST['cpass'])){
         $nome = mysqli_real_escape_string($conexao, $_POST['nome']);
         $email = mysqli_real_escape_string($conexao, $_POST['email']);
@@ -17,7 +21,7 @@
             echo "<script>
             alert('Menor de idade');
             </script>";
-        } else if(strlen($email) > 80 || strlen($email) == 0){// Email Inválido
+        } else if(strlen($email) > 80 || strlen($email) == 0 || !str_contains($email, "@")|| !str_contains($email, ".com")){// Email Inválido
             echo "<script>
             alert('Email Inválido');
             </script>";
