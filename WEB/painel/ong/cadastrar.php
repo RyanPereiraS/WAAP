@@ -18,9 +18,11 @@
     <form action="" method="post">
         <p><input type="text" name="nome" placeholder="Nome da Instituição" id=""></p>
         <p><input type="text" name="cnpj" id="" placeholder="CNPJ"></p>
+        <p><input type="text" name="administrador" id="" placeholder="Nome do Administrador"></p>
         <p><input type="text" name="email" placeholder="E-Mail do Administrador" id=""></p>
+        <p><input type="text" name="cpf" placeholder="CPF do Administrador" id=""></p>
         <p><input type="password" name="senha" placeholder="Senha do Administrador" id=""></p>
-        <p><input type="password" name="csenha" placeholder="Senha do Administrador" id=""></p>
+        <p><input type="password" name="csenha" placeholder="Confirme a Senha" id=""></p>
         <p><input type="submit" value="Enviar para Analise" name="" id=""></p>
     </form>
 </body>
@@ -33,8 +35,11 @@
         $nome = mysqli_real_escape_string($conexao, $_POST['nome']);
         $cnpj = mysqli_real_escape_string($conexao, $_POST['cnpj']);
         $email = mysqli_real_escape_string($conexao, $_POST['email']);
+        $administrador = mysqli_real_escape_string($conexao, $_POST['administrador']);
+        $cpf = mysqli_real_escape_string($conexao, $_POST['cpf']);
         $senha = mysqli_real_escape_string($conexao, $_POST['senha']);
         $csenha = mysqli_real_escape_string($conexao, $_POST['csenha']);
+        
         if(strlen($nome) == 0 || strlen($nome) > 50) {
             echo "<script> 
                     alert('Nome inválido');
@@ -54,8 +59,16 @@
             echo "<script> 
                     alert('senha inválido');
                 </script>";
-        } else {
-            $verificacao = "SELECT id FROM ong WHERE email='$email' OR certificado='$cnpj'";
+        } else if(strlen($administrador) == 0 || strlen($email) > 50 || strlen($email) < 4){
+            echo "<script> 
+                    alert('Nome de administrador inválido');
+                </script>";
+        } else if(strlen($cpf) != 11){
+            echo "<script> 
+                    alert('CPF inválido');
+                </script>";
+        }else {
+            $verificacao = "SELECT id_administrador FROM gerenciador WHERE email='$email' OR cpnj='$cnpj'";
             $executarver = mysqli_query($conexao, $verificacao);
             $linhas = mysqli_num_rows($executarver);
             if($linhas != 0){
@@ -64,14 +77,12 @@
                     </script>";
             } else {
                 $pass = sha1($senha);
-                $sql = "INSERT INTO ong (nome,email,senha,certificado,status) VALUES ('$nome', '$email', '$pass', '$cnpj', '0')";
+                $sql = "INSERT INTO gerenciador (nome,email,cnpj,status, administrador, cpf, senha) VALUES ('$nome', '$email', '$cnpj', '0', '$administrador', '$cpf', '$pass')";
                 $executar = mysqli_query($conexao, $sql);
                 if($executar) {
                     echo "<script> 
                         alert('Seus dados foram enviados! Assim que for aprovado você recebera um e-mail para concluir o cadastro de suas unidades!');
                     </script>";
-                    echo $senha;
-                    echo $pass;
                 } else {
                     echo "<script> 
                         alert('Erro');
