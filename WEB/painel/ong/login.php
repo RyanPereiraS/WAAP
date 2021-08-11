@@ -36,13 +36,15 @@
             $senha = sha1($senha);
             if(str_contains($login, '@') && str_contains($login, '.com')){
                 
-                $sql = "SELECT id,status FROM ong WHERE email='$login' AND senha='$senha'";
+                $sql = "SELECT id_administrador,status, administrador FROM gerenciador WHERE email='$login' AND senha='$senha'";
                 $executar = mysqli_query($conexao, $sql);
                 $resultado = mysqli_num_rows($executar);
                 $fetch = mysqli_fetch_array($executar);
                 if($resultado == 1 && $fetch[1] == "1"){
                     $_SESSION['logado'] = true;
-                    $_SESSION['ong'] = $fetch[0];
+                    $_SESSION['gerenciador'] = $fetch[0];
+                    $_SESSION['administrador'] = $fetch[2];
+                    $_SESSION['type'] = 1;
                     echo "<script> 
                         location.href='../ong/';
                     </script>";
