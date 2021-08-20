@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap');
+
+
+*{
+    margin: 0 auto;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Roboto Mono';
+	font-weight: bold
+
+}
+#cadastro_form form{
+    width:55%;
+    background-color: violet;
+    border-radius: 10%;
+   
+}
+.mb-3{
+    width: 80%;
+    margin: 1%;
+    margin-left: 10%;
+    margin-top:5% ;
+    
+
+}
+#cadastro_form button{
+    margin-left: 40%;
+    width: 20%;
+}
+
+p{
+    text-align: center;
+}
+
+#Logo{
+	margin:10px 80% 13px 107px;
+}
+
+#menu-home{
+	   
+    background-color:#FFD760;
+	font-size: 20px;
+}
+
+#menu-home ul{
+	list-style: none;
+	background-color:#FFD760;
+	max-width: 87%;
+}
+
+#menu-home ul li{
+	display: inline;
+	
+}
+
+#menu-home ul li a {
+	text-decoration: none;
+	color: #000;
+	padding: 20px;
+	display: inline-block;
+	transition: background .4s;
+}
+
+#menu-home ul li a:hover{
+	background-color: #9966CC ;
+}
+
+#menu-home ul li:nth-last-child(1){
+	background-color:#ffb600 ;
+	float: right;
+}
+
+#menu-home ul li:nth-last-child(2){
+	background-color: #ffb600;
+	float: right;
+}
+
+.linha hr{
+	border: none;
+    border-top: 1px solid #CCC;
+    margin: 40px auto 10px;
+    max-width: 90%;
+}
+h2{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.nomesob{
+   width: 80%;
+   margin: 1%;
+   margin-left: 10%;
+   margin-top:5% ;
+   
+
+}
+#senha{
+    width: 80%;
+    margin: 1%;
+    margin-left: 10%;
+    margin-top:5% ;
+    
+}
+#tele{
+    width: 80%;
+    margin: 1%;
+    margin-left: 10%;
+    margin-top:5% ;
+    
+}
+#datan{
+    width: 80%;
+   margin: 1%;
+   margin-left: 10%;
+   margin-top:5% ;
+   
+}
+#genero{
+    width: 80%;
+    margin: 1%;
+    margin-left: 10%;
+    margin-top:5% ;
+    
+}
