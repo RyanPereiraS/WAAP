@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap');
+
+*{
+	margin: 0 auto;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Roboto Mono';
+	font-weight: bold
+}
+a{
+    color: rgb(0, 0, 0) !important;
+    text-decoration: none !important;
+}
+#Logo{
+	margin:5px 79% 13px 107px;
+}
+#menu-home{
+	background-color:#FFD760;
+	font-size: 20px;
+}
+
+#menu-home ul{
+	list-style: none;
+	background-color:#FFD760;
+	max-width: 87%;
+}
+
+#menu-home ul li{
+	display: inline;
+	
+}
+
+#menu-home ul li a {
+	text-decoration: none;
+	color: #000;
+	padding: 20px;
+	display: inline-block;
+	transition: background .4s;
+}
+
+#menu-home ul li a:hover{
+	background-color: #9966CC ;
+}
+
+#menu-home ul li:nth-last-child(1){
+	float: right;
+}
+
+#menu-home ul li:nth-last-child(2){
+	float: right;
+}
+
+.linha hr{
+	border: none;
+    border-top: 1px solid #CCC;
+    margin: 40px auto 10px;
+    max-width: 90%;
+}
+#login{
+    float:left;
+    text-align: center;
+    margin-top: 5%;
+    margin-left: 25%;
+    padding-top: 5%;
+    margin-bottom: 10%;
+    padding-bottom: 5%;
+    border-radius: 40px;
+    background-color: #96c;
+    width: 50%;
+}
+#login h1{
+    margin-top: -5%;
+    margin-bottom: 10%;
+    margin-left: -5%;
+    color:#FFF;
+}
+#login form{
+    margin-left: 0.4%;
+}
+#login button{
+    background-color: #F4B942;
+    border: #F4B942 1px solid;
+    margin-left: -7%;
+    font-weight: bold;
+}
+#login button:hover{
+    background-color: #e2aa39;
+    border: #e2aa39 solid 1px;
+}
+#login form input[type='text']{
+    width: 90%;
+    padding: 4px;
+    font-size: 20px;
+    border: #96c 2px solid;
+}
+#login form input[type='password']{
+    width: 90%;
+    padding: 4px;
+    font-size: 20px;
+    border: #96c 2px solid;
+}
+#login .text{
+    color: #fff;
+    margin-left: -7%;
+    margin-bottom: -3%;
+    margin-top: 3%;
+}
+#login .text a{
+    color: #fff !important;
+
+}
+#login .text a:hover{
+    color: rgb(255, 225, 141) !important;
+}
+#rodape{
+    background-color: #F4B942;
+    height: 10%;
+    width: 100%;
+    float: left;
+    padding: 4% 0% 0 0;
+}
+#rodape .slogan{
+    float: left;
+    width: 20%;
+    margin-left: 10%;
+}
+#rodape .slogan h2{
+    font-size: 30px;
+    font-weight: bolder;
+    font-style: italic;
+}
+#rodape .nav{
+    float: left;
+    width: 25%;
+    margin-left: 4%;
+}
+#rodape .nav ul{
+    list-style: none;
+    font-size: 18px;
+    margin-right: 10%;
+}
+.nav ul .title{
+    margin-bottom: 10%;
+}
+
+#rodape .title p{
+    font-size: 18px;
+    font-weight: bolder;
+}
+#rodape .redes{
+    padding: 1% 2%;
+    float: left;
+    background: white;
+    width: 100%;
+    text-align: center;
+}
+#rodape .redes i{
+    display: inline-block;
+    margin-right: 3%;
+}
+#rodape .redes .bi-facebook{
+    font-size: 60px;
+}
+#rodape .redes .bi-facebook:hover{
+    color: blue;
+}
+#rodape .redes .bi-twitter{
+    font-size: 60px;
+}
+#rodape .redes .bi-twitter:hover{
+    color: rgb(0, 174, 255);
+}
+#rodape .redes .bi-instagram{
+    font-size: 60px;
+}
+#rodape .redes .bi-instagram:hover{
+    color: rgb(243, 31, 232);
+}
+#rodape .redes .bi-github{
+    font-size: 60px;
+}
