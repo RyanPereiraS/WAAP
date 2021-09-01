@@ -1,9 +1,11 @@
 <?php 
-    require_once "../utils/conexao.php";
-    require_once "../utils/functions.php";
+    require_once "../conexao/conexao.php";
+    function str_contains(string $haystack, string $needle): bool
+    {
+        return '' === $needle || false !== strpos($haystack, $needle);
+    }
     if(isset($_POST['nome'])&&isset($_POST['email'])&&isset($_POST['tell'])&&isset($_POST['ddd'])&&isset($_POST['nasci'])&&isset($_POST['pass'])&&isset($_POST['cpass'])){
         $nome = mysqli_real_escape_string($conexao, $_POST['nome']);
-        echo $nome;
         $email = mysqli_real_escape_string($conexao, $_POST['email']);
         $telefone = mysqli_real_escape_string($conexao, $_POST['tell']);
         $ddd = mysqli_real_escape_string($conexao, $_POST['ddd']);
@@ -36,27 +38,18 @@
             alert('Senha Inválido');
             </script>";
         } else {
-            $verificacao = "SELECT id FROM usuario WHERE email='$email'";
-            $executarver = mysqli_query($conexao, $verificacao);
-            $linhas = mysqli_num_rows($executarver);
-            if($linhas != 0){
+            $senha = sha1($senha);
+            $sql = "INSERT INTO usuario(nome, telefone, ddd, email, senha, nascimento) VALUES ('$nome', 
+            '$telefone','$ddd','$email', '$senha', '$nasc')";
+            $executar = mysqli_query($conexao, $sql);
+            if($executar == 1){// Sucesso
                 echo "<script>
-                        alert('Você já está cadastrado!');
+                    alert('Deu Certo');
                     </script>";
-            } else {
-                $senha = sha1($senha);
-                $sql = "INSERT INTO usuario(nome, telefone, ddd, email, senha, nascimento) VALUES ('$nome', 
-                '$telefone','$ddd','$email', '$senha', '$nasc')";
-                $executar = mysqli_query($conexao, $sql);
-                if($executar == 1){// Sucesso
-                    echo "<script>
-                        alert('Deu Certo');
-                        </script>";
-                } else {// Falha
-                    echo "<script>
-                        alert('Deu Errado');
-                        </script>";
-                }
+            } else {// Falha
+                echo "<script>
+                    alert('Deu Errado');
+                    </script>";
             }
         }
     } else {//Se Vier por fora
