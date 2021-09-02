@@ -24,6 +24,7 @@
 			<li><a href="#">Doe</a></li>
 			<li><a href="#">Emergência</a></li>
 			<li><a href="#">Sobre nós</a></li>
+
 			<li><a href="login/cadastrar.php" >Cadastrar</a></li>
 			<li><a href="login/index.php" >Login</a></li>
 		</ul>
@@ -43,6 +44,7 @@
 
 	<div id="circulo">
 		<img src="img/coracaoajudar.png" title="Coracao WAAP"/>
+
 	</div>
 
 	<div id="ajude">
@@ -70,6 +72,7 @@
 		<img src="img noticias/img2.png" alt="Image2">
 		<img src="img noticias/img3.png" alt="Image3">
 		<img src="img noticias/img4.png" alt="Image4">
+
 	</div>
 
 	<script src="JS/script.js"></script>

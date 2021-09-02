@@ -1,4 +1,6 @@
+
 let time = 2000,
+
     currentImageIndex = 0,
     
     image = document
