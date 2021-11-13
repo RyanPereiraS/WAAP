@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap');
+
+#campnome{
+	margin-bottom: 2%;
+}
+
+#campnasc{
+	margin: 2% 0;
+}
+
+#botao{
+	margin-bottom: 5%;	
+}
+
+#csenha{
+	margin: 10px auto;
+}
+
+#botaotwo{
+	margin: 2% 0 5% 0;
+}
+
+#logo_bar{
+	margin-left: 7%;
+}
+
+#camp_alterar{
+	margin-top: 2%;
+}

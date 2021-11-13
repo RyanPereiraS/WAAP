@@ -1,0 +1,117 @@
+
+  /* Featurettes
+  ------------------------- */
+  
+  .row{
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: calc(var(--bs-gutter-y) * -1);
+      margin-right: calc(var(--bs-gutter-x) * -.);
+      margin-left: calc(var(--bs-gutter-x) * -.5);
+  }
+
+  .featurette-divider {
+    margin: 3rem 0; /* Space out the Bootstrap <hr> more */
+  }
+  
+  /* Thin out the marketing headings */
+  .featurette-heading {
+    font-weight: 300;
+    line-height: 1;
+    /* rtl:remove */
+    letter-spacing: -.05rem;
+  }
+  
+  .col-lg-4.levy {
+    margin: 0 auto;
+  }
+  .col-4{
+    width: 28%;
+    max-width: 53%;
+    float: right;
+    margin-left: 15%
+  }
+  .icons{
+    color: black;
+    font-size: 45px;
+  }
+  a:hover{
+    color: black;  
+  }
+  a{
+    color: #000;
+  }
+  .py-5{
+      padding-bottom: 0!important;
+  }
+  .my-4{
+    margin-bottom: 0!important;
+  }
+  .mb-4{
+    margin-bottom: 0!important;
+  }
+  .py-4{
+      padding-bottom: 0!important;
+  }
+  .iconfooter{
+      font-size: 30px;
+  }
+  .logo{
+      width: 182px;
+      height: 78px;
+  }
+  .pslogan{
+    margin-bottom: 0;
+  }
+  .col-2{
+    display: table-cell;
+    max-width: 16%;
+    margin-left: 10%;
+  }
+  .col-22{
+      display: table-cell;
+      max-width: 20%;
+      margin-left: 2%;
+  }
+
+
+  .menus-nav{
+    margin-right: -12px;
+  }
+
+  .col-12{
+    font-size: large;
+    margin-right: 10%;
+    margin-left: 10%;
+  }
+  .col-md-3.menus-nav.text-end{
+    padding: 0%;
+    margin: 0 0 0 0;
+    max-width: 20%;
+  }
+  .col-md-3.menus-nav.text-end a{
+    width: 1%;
+  }
+  #banner{
+    background: url("../assets/background.jpg") no-repeat;
+    height: 120%;
+    display: flex;
+  }
+#banner #title{
+  margin-top: 20%;
+  margin-left: 4%;
+  color: #FFF;
+  height: 10%;
+  width: 100%;
+  float: left;
+}
+
+#banner #title h4{
+  font-style: italic;
+}
+#banner #title {
+  font-size: 45px;
+  font-weight: bolder;
+}
