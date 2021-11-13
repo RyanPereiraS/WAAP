@@ -1,3 +1,7 @@
+![](https://img.shields.io/badge/Academic-ETEC-orange?style=flat-square)
+![](https://img.shields.io/badge/Capstone%20Project.-ETEC-orange?style=flat-square)
+![](https://img.shields.io/badge/PHP%20JDK-v1.8-blue?style=flat-square)
+
 ![WAAP](logo.png)
 ### What's WAAP?
 
