@@ -16,7 +16,7 @@ $pagina = (isset($_GET['pagina']))? $_GET['pagina'] : 1;
 	<meta charset="utf-8">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 	<link rel="stylesheet" href="estilos/ong.css">
-	<title>ONGS - WAAP</title>
+	<title>Patas - WAAP</title>
 </head>
 <body>
 	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
@@ -187,28 +187,11 @@ $pagina = (isset($_GET['pagina']))? $_GET['pagina'] : 1;
 	?>
 	<p>
 		<?php
-			// VARIFICAR A PAGINA ANTERIOR E POSTERIOR
+			// VERIFICAR A PAGINA ANTERIOR E POSTERIOR
 			$pagina_ant = $pagina - 1;
 			$pagina_pos = $pagina + 1;
-		 ?>
 
-
-		<nav aria-label="Page navigation example">
-		  <ul class="pagination justify-content-end">
-		    <li class="page-item disabled">
-		    	<?php 
-		    		if ($pagina_ant != 0) { ?>
-		    			<li class="page-item">
-		    			  <a class="page-link" href="index.php?pagina=<?php echo $pagina_ant; ?>">Anterior</a>
-		    			</li>
-		    	<?php }else{ ?>
-		    	<li class="page-item disabled">
-		    		<a class="page-link" href="#">Anterior</a>
-		    	</li>
-		    <?php }	?>
-		    </li>
-		    <?php 
-		    //APRESENTAR A APRESENTACAO
+			// VERIFICAR FILTRO
 			$filtro = "";
 			if(!empty($_GET)){
 					
@@ -225,19 +208,50 @@ $pagina = (isset($_GET['pagina']))? $_GET['pagina'] : 1;
 					$filtro .= "&espec=$espec";
 				}
 			}
-		    for ($i = 1; $i < $num_pag + 1; $i++){ 
+		?>
+		
+
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination justify-content-end">
+		    <li class="page-item disabled">
+		    	<?php 
+		    		if ($pagina_ant != 0) { ?>
+						
+		    			<li class="page-item">
+		    			  <a class="page-link" href="index.php?pagina=<?php echo $pagina_ant.$filtro; ?>">Anterior</a>
+		    			</li>
+						<li class="page-item">
+		    			  <a class="page-link" href="index.php?pagina=<?php echo $pagina_ant.$filtro; ?>"><?php echo $pagina_ant; ?></a>
+		    			</li>
+		    	<?php }else{ ?>
+		    	<li class="page-item disabled">
+		    		<a class="page-link" href="#">Anterior</a>
+		    	</li>
+		    <?php }	?>
+		    </li>
+		    <?php 
+		   
+		    /*for ($i = 1; $i < $num_pag + 1; $i++){ 
 				
 		    	echo "<li class='page-item'><a class='page-link' href='index.php?pagina=$i$filtro'>$i</a></li>";
-		    } ?>
+		    } */
+			?>
 
 		    <li class="page-item">
 				<?php 
-		    		if ($pagina_pos <= $num_pag) { ?>
+		    		if ($pagina_pos <= $num_pag) { 
+						echo "<li class='page-item disabled'><a class='page-link' href='#'>$pagina</a></li>";
+						echo "<li class='page-item'><a class='page-link' href='index.php?pagina=$pagina_pos$filtro'>$pagina_pos</a></li>";
+						?>
 		    			<li class="page-item">
-		    				<a class="page-link" href="index.php?pagina=<?php echo $pagina_pos; ?>">Proximo</a>
+		    				<a class="page-link" href="index.php?pagina=<?php echo $pagina_pos.$filtro; ?>">Proximo</a>
 		    			</li>
 		    		<?php }else{ ?>
+						<?php 
+							echo "<li class='page-item disabled'><a class='page-link' href='#'>$pagina</a></li>";
+						?>
 		    		<li class="page-item disabled">
+						
 		    			<a class="page-link" href="#">Proximo</a>
 		    		</li>
 		    	<?php }	?>
