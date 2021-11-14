@@ -137,7 +137,11 @@
 					</tr>
 					<tr>
 						<th scope="row" class="table-active">Fundação</th>
-						<td><?php echo $fetch["fundacao"] ?></td>
+						<td><?php 
+						$fundacao = explode("-", $fetch['fundacao']);
+						echo "$fundacao[2]/$fundacao[1]/$fundacao[0]";
+						
+						?></td>
 					</tr>
 					<tr>
 						<th scope="row" class="table-active">CEP</th>
@@ -145,7 +149,7 @@
 					</tr>
 					<tr>
 						<th scope="row" class="table-active">Endereço</th>
-						<td><?php echo $endereco->logradouro . ", " . $endereco->bairro . ", " . $fetch['numero']; ?></td>
+						<td><?php echo "$fetch[cidade] - $fetch[uf], $fetch[bairro], $fetch[numero]"; ?></td>
 					</tr>
 					<?php
 					if ($fetch["complemento"] != '') {

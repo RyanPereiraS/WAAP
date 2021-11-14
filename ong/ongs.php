@@ -90,20 +90,18 @@
 					<div class="col">
 
 		<?php
-			$queryongs = "SELECT id_ong,nome, cep, logo FROM ong WHERE cep != '' AND tel_fixo !='' AND status_ong = 1";
+			$queryongs = "SELECT id_ong,nome, cidade,uf, logo FROM ong WHERE uf != '' AND tel_fixo !='' AND status_ong = 1";
 			$execongs = mysqli_query($conexao, $queryongs);
 			while($dadosong = mysqli_fetch_array($execongs)){
-				$cep = explode("-", $dadosong['cep']);
-				$cep = $cep[0].$cep[1];
-				$endereco = get_endereco($cep);
+				
 				echo"
 					<div class='card' style='width: 18rem;'>
 						<img class='card-img-top' src='../assets/ong/logo/$dadosong[logo]' alt='Card image cap'>
 						<hr>
 						<div class='card-body'>
 							<h5 class='card-title'>$dadosong[nome]</h5>
-							<p class='card-text'>$endereco->localidade - $endereco->uf</p>
-							<a href='ong/pagina-ong.php?id=$dadosong[id_ong]' class='btn btn-primary'>Veja-Mais</a>
+							<p class='card-text'>$dadosong[cidade] - $dadosong[uf]</p>
+							<a href='pagina-ong.php?id=$dadosong[id_ong]' class='btn btn-primary'>Veja-Mais</a>
 						</div>
 					</div>
 				";

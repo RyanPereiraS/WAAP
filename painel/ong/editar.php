@@ -19,7 +19,6 @@ if (!isset($_SESSION['logado'])) {
     $query = "SELECT u.nome, e.nome FROM usuario u INNER JOIN ong e ON e.id_usuario = u.id_usuario WHERE u.id_usuario = $_SESSION[id_usuario]";
     $sql = mysqli_query($conexao, $query);
     $usuario = mysqli_fetch_array($sql);
-    
 }
 ?>
 <!DOCTYPE html>
@@ -138,7 +137,7 @@ if (!isset($_SESSION['logado'])) {
         $sql = "SELECT * FROM ong WHERE id_usuario='$id_usuario'";
         $executar = mysqli_query($conexao, $sql);
         $ong = mysqli_fetch_array($executar);
-        
+
         ?>
 
         <div class="container">
@@ -233,10 +232,10 @@ if (!isset($_SESSION['logado'])) {
                         </div>
                         <hr>
                         <div class="mb-3">
-                        
+
                             <label for="exampleFormControlInput1" class="form-label">Ano de Fundação:</label>
                             <input class="form-control" type="date" name='fundacao' <?php echo "value='$ong[fundacao]'";
-                            ?>>
+                                                                                    ?>>
                         </div>
                         <hr>
                         <label for="exampleFormControlInput1" class="form-label">Descrição da ONG:</label>
@@ -248,7 +247,7 @@ if (!isset($_SESSION['logado'])) {
                         </div>
 
                     </form>
-                            
+
 
                     <form action="" method="post">
 
@@ -280,16 +279,66 @@ if (!isset($_SESSION['logado'])) {
                             </div>
                         </div>
                         <br>
+                        <div class="row">
+                            <div class="col">
+                                <label>Rua, Logradouro, Travessa <span>*</span> <span id='mensagem'></span></label>
+                                <input type="text" class="form-control pula" id="rua" name="rua" value="<?php echo $ong['logradouro'] ?>" placeholder="Informe a Rua, Logradouro, Travessa" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label>Cidade</label>
+                                <input type="text" class="form-control pula" id="cidade" name="cidade" value="<?php echo $ong['cidade'] ?>" placeholder="Informe a Cidade">
+                            </div>
+                            <div class="col">
+                                <label>Bairro <span>*</span> <span id='mensagem'></span></label>
+                                <input type="text" class="form-control pula" id="bairro" name="bairro" value="<?php echo $ong['bairro'] ?>" placeholder="Bairro" required>
+                            </div>
+                            
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label>UF</label>
+                                    <input type="text" class="form-control pula" id="uf" maxlength="2" disabled name="uf" value="<?php echo $ong['uf'] ?>" placeholder="UF">
+                                </div>
+                            </div> 
+                            
+                        </div>
 
                         <div class="d-grid gap-2 col-6 mx-auto">
+                            <br>
                             <input type="submit" class="btn btn-outline-success" name="enviarEnd" value="Atualizar">
                             <br>
                             <br>
                         </div>
 
                         <script type="text/javascript">
-                            $("#cep").mask("99999-999");
+                            $(document).ready(function() {
+
+                                // Inseri máscara no CEP
+                                $("#cep").mask("99999-999");
+
+                                // Método para consultar o CEP
+                                $('#cep').on('blur', function() {
+
+                                    if ($.trim($("#cep").val()) != "") {
+
+                                        $("#mensagem").html('(Aguarde, consultando CEP ...)');
+                                        $.getScript("http://cep.republicavirtual.com.br/web_cep.php?formato=javascript&cep=" + $("#cep").val(), function() {
+
+                                            if (resultadoCEP["resultado"]) {
+                                                $("#rua").val(unescape(resultadoCEP["tipo_logradouro"]) + " " + unescape(resultadoCEP["logradouro"]));
+                                                $("#bairro").val(unescape(resultadoCEP["bairro"]));
+                                                $("#cidade").val(unescape(resultadoCEP["cidade"]));
+                                                $("#uf").val(unescape(resultadoCEP["uf"]));
+                                            }
+
+                                            $("#mensagem").html('');
+                                        });
+                                    }
+                                });
+                            });
                         </script>
+
                     </form>
 
                     <form action="" method="post">
@@ -304,10 +353,12 @@ if (!isset($_SESSION['logado'])) {
                             <div class="col">
                                 <label for="exampleFormControlInput1" class="form-label">Facebook:</label>
                                 <input type="text" class="form-control" value="<?php echo $ong['facebook'] ?>" name="facebook" id="facebook" aria-label="First name">
+                                <figcaption class="figure-caption"><span style="color:red;">https://facebook.com/<span><span style="color:green;">waap<span></figcaption>
                             </div>
                             <div class="col">
                                 <label for="exampleFormControlInput1" class="form-label">Instagram:</label>
                                 <input type="text" class="form-control" name="instagram" value="<?php echo $ong['instagram'] ?>" id="" aria-label="Last name">
+                                <figcaption class="figure-caption"><span style="color:red;">https://instagram.com/<span><span style="color:green;">waap<span></figcaption>
                             </div>
                         </div>
                         <br>
@@ -321,7 +372,7 @@ if (!isset($_SESSION['logado'])) {
                             <div class="col">
                                 <label for="exampleFormControlInput1" class="form-label">Telefone Fixo:</label>
                                 <input type="text" class="form-control" name="tel_fixo" value="<?php echo $ong['tel_fixo'] ?>" id="tel_fixo" aria-label="Last name">
-                                <figcaption class="figure-caption">Por Favor Não inserir o número com DDD !!</figcaption>
+                                <figcaption class="figure-caption">(DDD) Telefone</figcaption>
                             </div>
                         </div>
                         <br>
@@ -340,48 +391,45 @@ if (!isset($_SESSION['logado'])) {
                         </div>
 
                         <script type="text/javascript">
-                            $("#whatsapp").mask("99999-9999");
+                            $("#whatsapp").mask("(99) 99999-9999");
                         </script>
                         <script type="text/javascript">
-                            $("#tel_fixo").mask("9999-9999");
+                            $("#tel_fixo").mask("(99) 9999-9999");
                         </script>
                     </form>
-        <hr>
-        <br/>
+                    <hr>
+                    <br />
 
-        <div class="d-grid gap-2 col-6 mx-auto">
-            <button class="btn btn-dark align-center" data-bs-toggle="modal" data-bs-target="#encerrar">Encerrar ONG</button>
-            <br>
-        </div>
-        <script>
-
-        </script>
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button class="btn btn-dark align-center" data-bs-toggle="modal" data-bs-target="#encerrar">Encerrar ONG</button>
+                        <br>
+                    </div>
     </section>
 
     </div>
     </div>
     </div>
-        <!--Modal-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-        <div class="modal fade" id="encerrar" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Atenção!</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal"><span>x</span></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Deseja encerrar as atividades no WAAP?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <form method="POST">
-                            <button class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-danger" type="submit" name="encerrar">Encerrar</button>
-                        </form>
-                    </div>
+    <!--Modal-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <div class="modal fade" id="encerrar" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Atenção!</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal"><span>x</span></button>
+                </div>
+                <div class="modal-body">
+                    <p>Deseja encerrar as atividades no WAAP?</p>
+                </div>
+                <div class="modal-footer">
+                    <form method="POST">
+                        <button class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+                        <button class="btn btn-danger" type="submit" name="encerrar">Encerrar</button>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 </body>
 
 </html>
@@ -418,8 +466,8 @@ if (isset($_POST['enviar'])) {
             $origemcapa = $img_capa['tmp_name'];
             $destinocapa = "../../assets/ong/capa/" . $nome_capa;
             $uparcapa = move_uploaded_file($origemcapa, $destinocapa);
-            if($uparcapa){
-                unlink("../../assets/ong/capa/".$ong['foto_capa']);
+            if ($uparcapa) {
+                unlink("../../assets/ong/capa/" . $ong['foto_capa']);
             }
         }
         if ($_FILES['foto_logo']['error'] == 4) {
@@ -441,8 +489,8 @@ if (isset($_POST['enviar'])) {
                 $origemlogo = $img_logo['tmp_name'];
                 $destinologo = "../../assets/ong/logo/" . $nome_logo;
                 $uparlogo = move_uploaded_file($origemlogo, $destinologo);
-                if($uparlogo){
-                    unlink("../../assets/ong/logo/".$ong['logo']);
+                if ($uparlogo) {
+                    unlink("../../assets/ong/logo/" . $ong['logo']);
                 }
             }
         }
@@ -468,7 +516,7 @@ if (isset($_POST['enviar'])) {
             }
         }
     }
-} else if (isset($_POST['enviarEnd'])) {
+} else if (isset($_POST['enviarEnd'])) {    
     if (empty($_POST['cep']) || empty($_POST['num'])) {
         echo "<script>
                     alert('A');
@@ -488,6 +536,10 @@ if (isset($_POST['enviar'])) {
         } else {
             $cep = mysqli_real_escape_string($conexao, $_POST['cep']);
             $num = mysqli_real_escape_string($conexao, $_POST['num']);
+            $logradouro = mysqli_real_escape_string($conexao, $_POST['rua']);
+            $cidade = mysqli_real_escape_string($conexao, $_POST['cidade']);
+            $bairro = mysqli_real_escape_string($conexao, $_POST['bairro']);
+            $uf = mysqli_real_escape_string($conexao, $_POST['uf']);
             if (strlen($_POST['comp']) == 0) {
                 $comp = null;
             } else {
@@ -498,7 +550,7 @@ if (isset($_POST['enviar'])) {
             } else {
                 $ref = mysqli_real_escape_string($conexao, $_POST['ref']);
             }
-            $sql = "UPDATE `ong` SET `cep` = '$cep', `numero` = '$num', `complemento` = '$comp', `referencia` = '$ref' WHERE `ong`.`id_ong` = $_SESSION[id_ong]";
+            $sql = "UPDATE `ong` SET `cep` = '$cep', `numero` = '$num', `complemento` = '$comp', `referencia` = '$ref', `logradouro` = '$logradouro', `cidade` = '$cidade', `bairro` = '$bairro', `uf` = '$uf' WHERE `ong`.`id_ong` = $_SESSION[id_ong]";
             $exe = mysqli_query($conexao, $sql);
             if ($exe) {
                 //echo $sql;
@@ -518,7 +570,7 @@ if (isset($_POST['enviar'])) {
                     location.href='./';
                 </script>";
     } else {
-        if (strlen($_POST['tel_fixo']) != 9) {
+        if (strlen($_POST['tel_fixo']) != 14) {
             echo "<script>
                     alert('Telefone fixo Inválido');
                     location.href='./';
@@ -538,7 +590,7 @@ if (isset($_POST['enviar'])) {
                         alert('Insira apenas o valor após a barra do link!\\n Exemplo: facebook.com/*waap*');
                         location.href='./';
                     </script>";
-        } else if (strlen($_POST['whatsapp']) != 10 && !empty($_POST['whatsapp'])) {
+        } else if (strlen($_POST['whatsapp']) != 15 && !empty($_POST['whatsapp'])) {
             echo "
                 <script>
                     alert('WhatsApp Inválido');
@@ -563,27 +615,27 @@ if (isset($_POST['enviar'])) {
             }
         }
     }
-} else if(isset($_POST['encerrar'])){
+} else if (isset($_POST['encerrar'])) {
     $sql = "SELECT id_animal FROM animal WHERE id_ong=$_SESSION[id_ong]";
     $exe = mysqli_query($conexao, $sql);
-    if($exe){
-        
-        while($dados = mysqli_fetch_array($exe)){
+    if ($exe) {
+
+        while ($dados = mysqli_fetch_array($exe)) {
             $sql2 = "DELETE FROM vacina_animal WHERE id_animal = $dados[id_animal]";
-            $exe2 = mysqli_query($conexao,$sql2);
-            if($exe){
+            $exe2 = mysqli_query($conexao, $sql2);
+            if ($exe) {
                 $sql3 = "DELETE FROM animal WHERE id_animal = $dados[id_animal]";
-                $exe3 = mysqli_query($conexao,$sql3);
+                $exe3 = mysqli_query($conexao, $sql3);
             }
         }
         $sql4 = "DELETE FROM `ong` WHERE `ong`.`id_ong` = $_SESSION[id_ong]";
         $exe4 = mysqli_query($conexao, $sql4);
-        if($exe4){
+        if ($exe4) {
 
             $sql5 = "UPDATE `usuario` SET `privilegio` = '2' WHERE `usuario`.`id_usuario` = '$_SESSION[id_usuario]'";
             $exe5 = mysqli_query($conexao, $sql5);
             session_destroy();
-                echo "<script> 
+            echo "<script> 
                     location.href='../../'
                 </script>";
         } else {
@@ -591,10 +643,9 @@ if (isset($_POST['enviar'])) {
                     alert('A');
                 </script>";
         }
-       // echo $sql4;echo"<br>";echo$sql5;exit;
+        // echo $sql4;echo"<br>";echo$sql5;exit;
 
     } else {
-        
     }
 }
 

@@ -12,6 +12,7 @@
 		}
 	}
 	$sql = "SELECT *, r.raca as racanome FROM animal a INNER JOIN ong o on o.id_ong = a.id_ong INNER JOIN raca r on r.id_raca = a.raca WHERE id_animal = $id";
+	//echo $sql;exit;
 	$exe = mysqli_query($conexao, $sql);
 	$fetch = mysqli_fetch_array($exe);
 ?>
@@ -111,10 +112,10 @@
 						<td>
 							<?php
 								switch ($fetch['sexo']) {
-									case "m":
+									case "m" || "M":
 										echo " <ion-icon name='male'></ion-icon>, " . $fetch["idade"];
 										break;
-									case "f":
+									case "f" || "F":
 										echo "<ion-icon name='female'></ion-icon>, " . $fetch["idade"];
 										break;
 								}
